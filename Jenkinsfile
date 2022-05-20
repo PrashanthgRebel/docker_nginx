@@ -7,7 +7,7 @@ pipeline {
         stages {
             stage('verifying git repo'){
                 steps{
-                    echo "welcome to jenkins practice"
+                    echo "welcome to jenkins practice"  
                     git branch: 'main', url: 'https://github.com/PrashanthgRebel/docker_nginx.git'
                 }
 
@@ -29,10 +29,10 @@ pipeline {
         	stage('starting nginx on nginx on nginx_web container '){
         		steps{
         			echo "starting  nginx service"
-                    sh '''sshpass -p \'9246\' ssh ${SSH_ARGS}  prashanth@172.29.87.227 " sudo docker exec -it nginx_web systemctl start nginx"
- 
+                    sh '''SSH_ARGS=\'-q -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null\'
+                    sshpass -p \'9246\' ssh ${SSH_ARGS}  prashanth@172.29.87.227 "sudo docker exec -it nginx_web systemctl start nginx"
 
-                    '''
+                    ''' 
 
         		}
         	}

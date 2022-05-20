@@ -1,4 +1,3 @@
-
 pipeline {
     agent any
         tools{
@@ -22,16 +21,21 @@ pipeline {
                     sshpass -p \'9246\' ssh ${SSH_ARGS}  prashanth@172.29.87.227 "sudo docker run -d --name nginx_web --privileged=true -p 900:80 nginx_test:latest  /usr/sbin/init"
  
 
-'''
+                    '''
+                    echo "Build success"
             	}
             }
             
-        	stage('testing'){
+        	stage('starting nginx on nginx on nginx_web container '){
         		steps{
-        			echo "testing code"
+        			echo "starting  nginx service"
+                    sh '''sshpass -p \'9246\' ssh ${SSH_ARGS}  prashanth@172.29.87.227 " sudo docker exec -it nginx_web systemctl start nginx"
+ 
+
+                    '''
+
         		}
         	}
 
         }
 }
-

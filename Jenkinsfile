@@ -30,7 +30,7 @@ pipeline {
         		steps{
         			echo "starting  nginx service"
                     sh '''SSH_ARGS=\'-q -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null\'
-                    sshpass -p \'9246\' ssh ${SSH_ARGS}  prashanth@172.29.87.227 "sudo docker exec -it nginx_web systemctl start nginx"
+                    sshpass -p \'9246\' ssh ${SSH_ARGS}  prashanth@172.29.87.227 "sudo docker exec  nginx_web systemctl start nginx"
 
                     ''' 
 

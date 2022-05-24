@@ -13,7 +13,7 @@ pipeline {
             	steps{
 
             		sh '''SSH_ARGS=\'-q -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null\'
-                    sshpass -p \'9246\' ssh ${SSH_ARGS}  prashanth@172.29.87.227 "sudo docker build -t nginx_test /home/prashanth/Docker/docker_nginx/"
+                    ssh ${SSH_ARGS}  prashanth@172.29.87.227 "sudo docker build -t nginx_test /home/prashanth/Docker/docker_nginx/"
                     
                     '''
                     
@@ -25,7 +25,7 @@ pipeline {
                 steps{
 
                     sh '''SSH_ARGS=\'-q -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null\'
-                    sshpass -p \'9246\' ssh ${SSH_ARGS}  prashanth@172.29.87.227 "sudo docker stop nginx_web && sudo docker rm nginx_web"
+                    ssh ${SSH_ARGS}  prashanth@172.29.87.227 "sudo docker stop nginx_web && sudo docker rm nginx_web"
 
                     '''
                 }
@@ -34,7 +34,7 @@ pipeline {
             stage('Creating New nginx_web container'){
                 steps{
                     sh '''SSH_ARGS=\'-q -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null\'
-                    sshpass -p \'9246\' ssh ${SSH_ARGS}  prashanth@172.29.87.227 "sudo docker run -d --name nginx_web --privileged=true -p 900:80 nginx_test:latest  /usr/sbin/init"
+                    ssh ${SSH_ARGS}  prashanth@172.29.87.227 "sudo docker run -d --name nginx_web --privileged=true -p 900:80 nginx_test:latest  /usr/sbin/init"
                     '''
 
                 }
@@ -44,7 +44,7 @@ pipeline {
         		steps{
         			echo "starting  nginx service"
                     sh '''SSH_ARGS=\'-q -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null\'
-                    sshpass -p \'9246\' ssh ${SSH_ARGS}  prashanth@172.29.87.227 "sudo docker exec nginx_web systemctl start nginx"
+                    ssh ${SSH_ARGS}  prashanth@172.29.87.227 "sudo docker exec nginx_web systemctl start nginx"
 
                     ''' 
 
@@ -55,7 +55,7 @@ pipeline {
                 steps{
 
                    sh '''SSH_ARGS=\'-q -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null\'
-                    sshpass -p \'9246\' ssh ${SSH_ARGS}  prashanth@172.29.87.227 "sudo curl -I 172.29.87.227:900"
+                    ssh ${SSH_ARGS}  prashanth@172.29.87.227 "sudo curl -I 172.29.87.227:900"
 
                     ''' 
 

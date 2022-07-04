@@ -13,7 +13,7 @@ pipeline {
             	steps{
 
             		sh '''SSH_ARGS=\'-q -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null\'
-                    sshpass -p \'9246\' ssh ${SSH_ARGS}  prashanth@172.29.87.227 "sudo docker build -t nginx_test /home/prashanth/Docker/docker_nginx/"
+                    sshpass -p \'9246\' ssh ${SSH_ARGS}  prashanth@172.29.87.227 "sudo docker build -t nginx_test /home/prashanth/Devops/Docker_learning/docker_nginx"
                     
                     '''
                     
@@ -25,7 +25,7 @@ pipeline {
                 steps{
 
                     sh '''SSH_ARGS=\'-q -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null\'
-                    sshpass -p \'9246\' ssh ${SSH_ARGS}  prashanth@172.29.87.227 "sudo docker stop nginx_web && sudo docker rm nginx_web"
+                    sshpass -p \'9246\' ssh ${SSH_ARGS}  prashanth@172.29.87.227 "ls"
 
                     '''
                 }
